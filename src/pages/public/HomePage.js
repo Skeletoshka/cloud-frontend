@@ -8,7 +8,7 @@ export default function HomePage() {
     return (
         <div>
             <Button onClick={() => navigate("/s3")}>S3 хранилище</Button>
-            <Button>Распознование изображений</Button>
+            <Button onClick={() => navigate("/vision")}>Распознование изображений</Button>
         </div>
     )
 }

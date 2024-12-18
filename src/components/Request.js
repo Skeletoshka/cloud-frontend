@@ -61,7 +61,7 @@ export const requestToApi = {
                 if(response.status === 500){
                     notification.open({
                         message: 'Ошибка получения данных с сервера',
-                        description: "Нет прав",
+                        description: "Обратитесь к системному администратору",
                     });
                 }else {
                     notification.open({
@@ -107,7 +107,7 @@ export const requestToApi = {
                     if(response.status === 500){
                         notification.open({
                             message: 'Ошибка получения данных с сервера',
-                            description: "Нет прав",
+                            description: "Обратитесь к системному администратору",
                         });
                     }else {
                         notification.open({
@@ -130,6 +130,22 @@ export const requestToApi = {
                     return json
                 }
             });
+    },
+
+    postDownloadFile: (url, body) => {
+        let header = {};
+        if(localStorage.getItem("tokenAccess")==="" || localStorage.getItem("tokenAccess") === undefined) {
+            header = {}
+        }
+        else {
+            header = {
+                'Authorization': 'Bearer ' + localStorage.getItem("tokenAccess")}
+        }
+        return fetch(process.env.REACT_APP_DEV_BACKEND_URL.replace("/undefined", "") + url, {
+            method: 'POST',
+            headers: header,
+            body: body
+        });
     },
 
     updateUserDetails: (data) => {
